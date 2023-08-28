@@ -50,6 +50,7 @@ jobs:
   BSD-dist-latest:
     runs-on: ${{ matrix.host }}
     strategy:
+      fail-fast: false
       matrix:
         include:
         - name: freebsd
