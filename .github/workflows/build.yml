@@ -47,7 +47,7 @@ jobs:
           make
           make stream
   
-  freeBSD-latest:
+  FreeBSD-latest:
     runs-on: macos-12
     
     steps:
@@ -55,7 +55,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Build
-        uses: cross-platform-actions/action@v0.15.0
+        uses: cross-platform-actions/action@v0.19.0
         with:
           operating_system: freebsd
           version: '13.2'
@@ -65,6 +65,41 @@ jobs:
             gmake
             gmake stream
 
+  NetBSD-latest:
+    runs-on: macos-12
+    
+    steps:
+      - name: Clone
+        uses: actions/checkout@v3
+
+      - name: Build
+        uses: cross-platform-actions/action@v0.19.0
+        with:
+          operating_system: nedbsd
+          version: '9.3'
+          run: |
+            sudo pkgin update
+            sudo pkgin install -y gmake sdl2
+            gmake
+            gmake stream            
+
+  OpenBSD-latest:
+    runs-on: macos-12
+    
+    steps:
+      - name: Clone
+        uses: actions/checkout@v3
+
+      - name: Build
+        uses: cross-platform-actions/action@v0.19.0
+        with:
+          operating_system: openbsd
+          version: '7.3'
+          run: |
+            doas pkg_add -u
+            doas pkg_add -y gmake sdl2
+            gmake
+            gmake stream   
   ubuntu-latest-gcc:
     runs-on: ubuntu-latest
 
